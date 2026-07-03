@@ -29,7 +29,7 @@ while is_running:
         else: 
             print(f"Correto! A resposta é {answer}")    
             print(f"Numero de palpites: {guesses}")
-            #is_running = False
+            is_running = False
     else:
         print("Palpite inválido")
         print(f"Por favor selecione um número entre {lowest_num} and {highest_num}")
