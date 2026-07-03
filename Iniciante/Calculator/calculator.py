@@ -2,17 +2,32 @@ from tkinter import*
 
 def button_press(num):
     global equation_text
+    
     equation_text = equation_text + str(num)
     equation_label.set(equation_text)
 
 def equals():
     global equation_text
-    total = str(eval(equation_text))
-    equation_label.set(total)
-    equation_text = total
+    
+    try:
+        total = str(eval(equation_text))
+        equation_label.set(total)
+        equation_text = total
+    
+    except ZeroDivisionError:
+        equation_label.set("Erro aritmético")        
+        equation_text = ""
+        
+    except SyntaxError:
+        equation_label.set("Erro sintaxe")        
+        equation_text = ""
     
 def clear(num):
-    pass
+    global equation_text
+    
+    equation_label.set("")
+    equation_text = ""
+    
 
 window = Tk()
 window.title("Calculadora da Gabs")
@@ -69,19 +84,19 @@ plus.grid(row=0, column=3)
 minus = Button(frame, text='-', height=4, width=9, font=35,command=lambda:button_press('-'))
 minus.grid(row=1, column=3)
 
-multiply = Button(frame, text='x', height=4, width=9, font=35,command=lambda:button_press('x'))
+multiply = Button(frame, text='*', height=4, width=9, font=35,command=lambda:button_press('*'))
 multiply.grid(row=2, column=3)
 
 divide = Button(frame, text='/', height=4, width=9, font=35,command=lambda:button_press('/'))
 divide.grid(row=3, column=3)
 
-equal = Button(frame, text='=', height=4, width=9, font=35,command=lambda:button_press('='))
+equal = Button(frame, text='=', height=4, width=9, font=35,command=equals)
 equal.grid(row=3, column=2)
 
 decial = Button(frame, text='.', height=4, width=9, font=35,command=lambda:button_press('.'))
 decial.grid(row=3, column=1)
 
-clear = Button(window, text='clear', height=4, width=12, font=35,command=clear)
-clear.pack()
+clear_button = Button(window, text='clear', height=4, width=12, font=35,command=clear)
+clear_button.pack()
 
 window.mainloop()
