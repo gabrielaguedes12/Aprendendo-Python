@@ -56,3 +56,22 @@ class TodoApp:
             height=10,
             activestyle="none"
         )
+        
+        scrollbar = tk.Scrollbar(list_frame)
+        scrollbar.pack(side="right", fill="y")
+        
+        self.task_listbox.config(yscrollcommand=scrollbar.set)
+        scrollbar.config(command=self.task_listbox.yview)
+        
+        self.info_label = tk.Label(
+            self.root,
+            text="",
+            font=("Helvetica", 11),
+            bg= "#f0f4f7",
+            fg="#007acc"
+        )
+        
+        self.info_label.pack(pady=5)
+        
+        
+        
